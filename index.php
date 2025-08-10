@@ -1,4 +1,8 @@
 
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,6 +27,7 @@
           <button onclick="location.href='file.php'">파일 업로드</button>
           <button onclick="location.href='url.php'">이미지 요청</button>
           <button onclick="location.href='memo.php'">메모 기록/확인</button>
+
         <?php endif; ?>
       </div>
     </header>
@@ -34,8 +39,13 @@
           <input type="number" name="quantity" placeholder="수량" required>
           <button type="submit">주문하기</button>
         </form>
+        <div class="buttons">
+          <form action="problem.php" method="POST">
+            <input type="text" name="url" placeholder="url" required>
+            <button type="submit">실행</button>
+          </form>
+        </div>
       </div>
     </main>
   </body>
 </html>
-
