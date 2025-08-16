@@ -1,63 +1,41 @@
 <?php
-session_start();
+include "inc_head.php";
 
-
+// 세션 포트 랜덤 설정 (한 번만)
 if (!isset($_SESSION['local_port'])) {
     $_SESSION['local_port'] = rand(1500, 1800);
 }
 $local_port = $_SESSION['local_port'];
 
-// 나머지 코드는 동일
+// Python 서버 실행 (한 번만)
+if (!isset($_SESSION['server_started'])) {
+    $python_script = "C:\\xampp\\htdocs\\25sum\\server.py";
+    $cmd = "python \"$python_script\" $local_port";
+    pclose(popen("start /B " . $cmd, "r"));
 
-
-$flag = "[**FLAG**]";
-if (file_exists("./flag.txt")) {
-    $flag = file_get_contents("./flag.txt");
+    $_SESSION['server_started'] = true;
 }
 
+// 서버가 뜰 시간을 잠시 대기
+usleep(500000); // 0.5초
 
-//http://localhost:8000/ 이런 거 직접 입력
-if ($_SERVER['REQUEST_URI'] === "/") {
-    echo "<script>alert('실패3');window.location.href = 'http://localhost/2025여름해캠/index.php';</script>";
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $url = $_POST['url'] ?? "";
+
+    $parsed = @parse_url($url);
+    $host = strtolower($parsed['host'] ?? '');
+    $port = isset($parsed['port']) ? intval($parsed['port']) : 80;
+
+    $allowed_hosts = ["127.0.0.1", "localhost", "::1"];
+    if (in_array($host, $allowed_hosts, true) && $port === $local_port) {
+        echo "<script>alert('성공');window.location.href='/25sum/index.php';</script>";
+        exit;
+    } else {
+        echo "<script>alert('실패');window.location.href='/25sum/index.php';</script>";
+        exit;
+    }
+} else {
+    echo "<script>alert('잘못된 요청');window.location.href='/25sum/index.php';</script>";
     exit;
 }
-
-
-
-    if ($_SERVER['REQUEST_METHOD'] === "GET") {
-        echo "<script>alert('실패4');window.location.href = 'http://localhost/2025여름해캠/index.php';</script>";
-        exit;
-
-    } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $url = $_POST['url'] ?? "";
-        $urlp = parse_url($url);
-
-        if (isset($url[0]) && $url[0] === "/") {
-            $url = "http://localhost:80" . $url;
-        }
-        elseif (isset($urlp['host']) &&
-               (strpos($urlp['host'], "localhost") !== false || strpos($urlp['host'], "127.0.0.1") !== false)) {
-            if (isset($urlp['port']) && intval($urlp['port']) === $local_port) {
-
-                echo "<script>alert('성공');window.location.href = 'http://localhost/2025여름해캠/index.php';</script>";
-                exit;
-                // $img = base64_encode($data);
-                // include "img_viewer.html";
-
-            } else {
-
-                echo "<script>alert('실패1');window.location.href = 'http://localhost/2025여름해캠/index.php';</script>";
-                exit;
-
-            }
-        }
-        else {
-            // localhost 아닌 URL 처리
-            $data = @file_get_contents($url);
-
-            echo "<script>alert('실패2');window.location.href = 'http://localhost/2025여름해캠/index.php';</script>";
-            exit;
-        }
-    }
-
 ?>
