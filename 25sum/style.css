@@ -1,0 +1,286 @@
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/25sum/타르트.jpg'); /* 배경 이미지 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+header .nav-left {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+header .nav-right button {
+    background-color: rgba(173,216,230,0.7);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header .nav-right button:hover {
+    background-color: #87ceeb;
+    color: #fff;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+main h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+main p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+main .buttons button {
+    background-color: rgba(173,216,230,0.7);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    margin: 10px;
+    color: #000;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+main .buttons button:hover {
+    background-color: #87ceeb;
+    color: #fff;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;              /* 가로 배치 */
+  justify-content: space-between;
+  gap: 10px;                  /* 버튼 사이 간격 */
+  padding: 15px;
+
+}
+
+footer button {
+  flex: 1;                    /* 버튼들이 균등하게 공간 나눔 */
+  padding: 15px 0;            /* 위아래 여백 크게 */
+  font-size: 1.1em;           /* 글자 크기 키움 */
+  background-color: #9cc9cd;  /* 버튼 배경색 */
+  color: #fff;                /* 글자색 */
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+footer button:hover {
+  background-color: #86b2b6;  /* hover 시 색 조금 어둡게 */
+}
+
+/* memo.php 전용 body */
+/* memo.php 전용 */
+body.body-memo {
+    font-family: 'Noto Sans KR', sans-serif;
+     background-image: none !important;  /* 기존 이미지 제거 */
+    background-color: #e5d6b8 !important;
+    margin: 0;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+/* 제목 */
+.body-memo h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+/* 전체 컨테이너 */
+.body-memo .container {
+    display: flex;
+    gap: 20px;
+}
+
+/* 왼쪽 누적 메모 */
+.body-memo .memo-list {
+    flex: 4;
+    min-height: 400px;
+    max-height: 600px;  /* 최대 높이 지정 */
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #fff8f0;
+    overflow-y: auto;
+}
+/* 누적 메모 글씨 색상 */
+.body-memo .memo-list ul  {
+    color: #000; /* 검정색 */
+    font-size: 1em;
+    margin-bottom: 5px;
+    list-style: none; /* 점 제거 */
+    padding-left: 0;  /* 왼쪽 여백 제거 */
+}
+
+
+/* 오른쪽 마지막 메모 + 입력폼 */
+/* 오른쪽 영역 (배경과 테두리 제거) */
+.body-memo .side {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 15px;
+    padding: 0;        /* 패딩 제거 */
+    border-radius: 0;  /* 둥근 모서리 제거 */
+    background: none;  /* 배경색 제거 */
+    align-items: stretch;
+}
+
+
+/* 메모 입력창 */
+.body-memo .side .memo-input {
+    padding: 12px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+/* 버튼 스타일 동일 적용 */
+.body-memo .side button {
+    padding: 12px 0;
+    border: none;
+    border-radius: 15px;
+    background-color: #b97d5e;
+    color: #000;
+    cursor: pointer;
+}
+
+.body-memo .side button:hover {
+    background-color: #a56b4e;
+}
+
+/* 마지막 메모 박스 */
+.body-memo .memo-display-box {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffeedd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 입력폼 */
+.body-memo .memo-form {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.body-memo .memo-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+}
+
+/* 버튼 */
+.body-memo button[type="submit"],
+.body-memo .side button:not([type="submit"]) {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 15px;
+    background-color: #b97d5e;
+    color: #000;
+    cursor: pointer;
+}
+
+.body-memo button[type="submit"]:hover,
+.body-memo .side button:not([type="submit"]):hover {
+    background-color: #a56b4e;
+}
+
+/* 헤더 */
+body.body-memo header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+body.body-memo header .nav-left {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+body.body-memo header button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 12px;
+    background-color: #b97d5e;
+    color: #000;
+    cursor: pointer;
+}
+
+body.body-memo header button:hover {
+    background-color: #a56b4e;
+}
+
+.board-title {
+    font-family: 'Nanum Myeongjo', serif; /* 나눔명조 폰트 */
+    color: #000; /* 검정색 */
+}
+
+.body-memo .memo-form textarea {
+    width: 100%;
+    height: 150px;       /* 세로 길이 조정 */
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    resize: none;        /* 사용자가 크기 조절 못하게 */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1em;
+}
+.memo-list p {
+    background: transparent;  /* 부모 배경(아이보리)이 비치도록 */
+    color: #000;             /* 글자색 검정 */
+    margin: 5px 0;
+}
